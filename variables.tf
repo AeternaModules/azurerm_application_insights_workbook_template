@@ -26,15 +26,23 @@ EOT
     template_data       = string
     author              = optional(string)
     localized           = optional(string)
-    priority            = optional(number, 0)
+    priority            = optional(number) # Default: 0
     tags                = optional(map(string))
-    galleries = object({
+    galleries = list(object({
       category      = string
       name          = string
-      order         = optional(number, 0)
-      resource_type = optional(string, "Azure Monitor")
-      type          = optional(string, "workbook")
-    })
+      order         = optional(number) # Default: 0
+      resource_type = optional(string) # Default: "Azure Monitor"
+      type          = optional(string) # Default: "workbook"
+    }))
   }))
+  validation {
+    condition = alltrue([
+      for k, v in var.application_insights_workbook_templates : (
+        length(v.galleries) >= 1
+      )
+    ])
+    error_message = "Each galleries list must contain at least 1 items"
+  }
 }
 

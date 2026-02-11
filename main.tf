@@ -10,12 +10,15 @@ resource "azurerm_application_insights_workbook_template" "application_insights_
   priority            = each.value.priority
   tags                = each.value.tags
 
-  galleries {
-    category      = each.value.galleries.category
-    name          = each.value.galleries.name
-    order         = each.value.galleries.order
-    resource_type = each.value.galleries.resource_type
-    type          = each.value.galleries.type
+  dynamic "galleries" {
+    for_each = each.value.galleries
+    content {
+      category      = galleries.value.category
+      name          = galleries.value.name
+      order         = galleries.value.order
+      resource_type = galleries.value.resource_type
+      type          = galleries.value.type
+    }
   }
 }
 
