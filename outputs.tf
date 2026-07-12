@@ -1,3 +1,7 @@
+output "application_insights_workbook_templates_id" {
+  description = "Map of id values across all application_insights_workbook_templates, keyed the same as var.application_insights_workbook_templates"
+  value       = { for k, v in azurerm_application_insights_workbook_template.application_insights_workbook_templates : k => v.id }
+}
 output "application_insights_workbook_templates_author" {
   description = "Map of author values across all application_insights_workbook_templates, keyed the same as var.application_insights_workbook_templates"
   value       = { for k, v in azurerm_application_insights_workbook_template.application_insights_workbook_templates : k => v.author }
