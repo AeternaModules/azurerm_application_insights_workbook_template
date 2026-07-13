@@ -26,14 +26,14 @@ EOT
     template_data       = string
     author              = optional(string)
     localized           = optional(string)
-    priority            = optional(number) # Default: 0
+    priority            = optional(number)
     tags                = optional(map(string))
     galleries = list(object({
       category      = string
       name          = string
-      order         = optional(number) # Default: 0
-      resource_type = optional(string) # Default: "Azure Monitor"
-      type          = optional(string) # Default: "workbook"
+      order         = optional(number)
+      resource_type = optional(string)
+      type          = optional(string)
     }))
   }))
   validation {
